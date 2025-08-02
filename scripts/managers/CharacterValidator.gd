@@ -1,6 +1,11 @@
 class_name CharacterValidator
 extends RefCounted
 
+# Preload dependencies
+const Character = preload("res://data/Character.gd")
+const StatManager = preload("res://scripts/managers/StatManager.gd")
+const SkillManager = preload("res://scripts/managers/SkillManager.gd")
+
 # Handles validation for character creation
 # Provides user-friendly error messages and validation rules
 

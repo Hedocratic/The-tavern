@@ -3,6 +3,9 @@ extends Node
 # Global game state manager
 # This autoload singleton manages data that needs to persist between scenes
 
+# Preload the Character class
+const Character = preload("res://data/Character.gd")
+
 var current_character: Character = null
 var party_members: Array[Character] = []
 var game_data: Dictionary = {}
