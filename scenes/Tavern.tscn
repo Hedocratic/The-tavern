@@ -1,0 +1,105 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4v0m2w8xejl8"]
+
+[ext_resource type="Script" path="res://scripts/Tavern.gd" id="1_abc123"]
+
+[node name="Tavern" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_abc123")
+
+[node name="SituationOverlay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="SituationOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SituationOverlay/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="WelcomeLabel" type="Label" parent="SituationOverlay/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Welcome!"
+horizontal_alignment = 1
+
+[node name="SituationText" type="RichTextLabel" parent="SituationOverlay/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Situation text goes here..."
+
+[node name="ContinueButton" type="Button" parent="SituationOverlay/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="TavernMain" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TavernMain"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TavernHeader" type="HBoxContainer" parent="TavernMain/VBoxContainer"]
+layout_mode = 2
+
+[node name="TavernName" type="Label" parent="TavernMain/VBoxContainer/TavernHeader"]
+layout_mode = 2
+text = "Tavern Name"
+
+[node name="MainContent" type="HBoxContainer" parent="TavernMain/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftPanel" type="VBoxContainer" parent="TavernMain/VBoxContainer/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CharacterInfo" type="VBoxContainer" parent="TavernMain/VBoxContainer/MainContent/LeftPanel"]
+layout_mode = 2
+
+[node name="PartyPanel" type="VBoxContainer" parent="TavernMain/VBoxContainer/MainContent/LeftPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TavernMain/VBoxContainer/MainContent/LeftPanel/PartyPanel"]
+layout_mode = 2
+text = "Party"
+
+[node name="PartyList" type="VBoxContainer" parent="TavernMain/VBoxContainer/MainContent/LeftPanel/PartyPanel"]
+layout_mode = 2
+
+[node name="RightPanel" type="VBoxContainer" parent="TavernMain/VBoxContainer/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="TavernMain/VBoxContainer/MainContent/RightPanel"]
+layout_mode = 2
+text = "Tavern Menu"
+
+[node name="TavernMenu" type="VBoxContainer" parent="TavernMain/VBoxContainer/MainContent/RightPanel"]
+layout_mode = 2

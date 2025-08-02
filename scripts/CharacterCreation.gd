@@ -152,20 +152,95 @@ func _setup_skills_ui():
 			skill_spinbox.value = current_character.skills.get(skill, 0)
 			skill_spinbox.value_changed.connect(_on_skill_changed.bind(skill))
 			skill_container.add_child(skill_spinbox)
-			
 			skills_container.add_child(skill_container)
 
 func apply_class_specific_setup(class_name: String):
-	# Apply class-specific UI adjustments or highlights
+	# Apply class-specific UI adjustments or highlights and provide useful feedback
 	match class_name:
 		"Warrior":
 			print("Selected Warrior - emphasizing Strength and Fortitude")
+			# Highlight strength and fortitude stats
+			if strength_spinbox:
+				strength_spinbox.modulate = Color.LIGHT_GREEN
+			if fortitude_spinbox:
+				fortitude_spinbox.modulate = Color.LIGHT_GREEN
 		"Wizard":
 			print("Selected Wizard - emphasizing Intelligence and Arcane")
+			if intelligence_spinbox:
+				intelligence_spinbox.modulate = Color.LIGHT_BLUE
+			if arcane_spinbox:
+				arcane_spinbox.modulate = Color.LIGHT_BLUE
 		"Thief":
 			print("Selected Thief - emphasizing Agility and Stealth")
+			if agility_spinbox:
+				agility_spinbox.modulate = Color.YELLOW
+		"Paladin":
+			print("Selected Paladin - emphasizing Strength, Fortitude, and Charisma")
+			if strength_spinbox:
+				strength_spinbox.modulate = Color.LIGHT_GREEN
+			if fortitude_spinbox:
+				fortitude_spinbox.modulate = Color.LIGHT_GREEN
+			if charisma_spinbox:
+				charisma_spinbox.modulate = Color.PINK
+		"Barbarian":
+			print("Selected Barbarian - emphasizing Strength and Fortitude")
+			if strength_spinbox:
+				strength_spinbox.modulate = Color.RED
+			if fortitude_spinbox:
+				fortitude_spinbox.modulate = Color.RED
+		"Assassin":
+			print("Selected Assassin - emphasizing Agility and Strength")
+			if agility_spinbox:
+				agility_spinbox.modulate = Color.DARK_RED
+			if strength_spinbox:
+				strength_spinbox.modulate = Color.DARK_RED
+		"Cleric":
+			print("Selected Cleric - emphasizing Charisma and Arcane")
+			if charisma_spinbox:
+				charisma_spinbox.modulate = Color.GOLD
+			if arcane_spinbox:
+				arcane_spinbox.modulate = Color.GOLD
+		"Druid":
+			print("Selected Druid - emphasizing Intelligence, Arcane, and Agility")
+			if intelligence_spinbox:
+				intelligence_spinbox.modulate = Color.GREEN
+			if arcane_spinbox:
+				arcane_spinbox.modulate = Color.GREEN
+		"Necromancer":
+			print("Selected Necromancer - emphasizing Intelligence and Arcane")
+			if intelligence_spinbox:
+				intelligence_spinbox.modulate = Color.PURPLE
+			if arcane_spinbox:
+				arcane_spinbox.modulate = Color.PURPLE
+		"Warlock":
+			print("Selected Warlock - emphasizing Arcane and Charisma")
+			if arcane_spinbox:
+				arcane_spinbox.modulate = Color.VIOLET
+			if charisma_spinbox:
+				charisma_spinbox.modulate = Color.VIOLET
+		"Monk":
+			print("Selected Monk - emphasizing Agility, Fortitude, and Strength")
+			if agility_spinbox:
+				agility_spinbox.modulate = Color.ORANGE
+			if fortitude_spinbox:
+				fortitude_spinbox.modulate = Color.ORANGE
 		_:
 			print("Selected class: ", class_name)
+	
+	# Reset other stat spinboxes to normal color
+	_reset_non_highlighted_stats(class_name)
+
+func _reset_non_highlighted_stats(class_name: String):
+	"""Reset stat spinboxes that aren't highlighted for the selected class"""
+	# First reset all to white
+	var all_spinboxes = [
+		strength_spinbox, fortitude_spinbox, agility_spinbox,
+		intelligence_spinbox, charisma_spinbox, arcane_spinbox
+	]
+	
+	for spinbox in all_spinboxes:
+		if spinbox:
+			spinbox.modulate = Color.WHITE
 
 func _on_class_selected(index: int):
 	_apply_class_selection(index)
@@ -281,15 +356,32 @@ func _update_secondary_stats_display():
 		secondary_stats_container.add_child(stat_container)
 
 func _on_create_character():
-	# Here you would typically save the character or pass it to the next scene
+	# Validate character is ready
+	if current_character.name.length() == 0:
+		print("Please enter a character name")
+		# TODO: Show proper error dialog
+		return
+	
+	# Additional validation could be added here
+	# e.g., check if stat points are properly allocated
+	
+	# Character creation complete
 	print("Character created: ", current_character.name)
 	print("Class: ", current_character.character_class)
+	print("Race: ", current_character.race)
+	print("Gender: ", current_character.gender)
 	print("Stats: ", current_character.primary_stats)
 	print("Skills: ", current_character.skills)
+	print("Secondary Stats: ", current_character.secondary_stats)
 	print("Gold: ", current_character.gold)
+	print("HP: ", current_character.health, "/", current_character.max_health)
+	print("MP: ", current_character.mana, "/", current_character.max_mana)
 	
-	# You might transition to the main game or tavern scene here
-	# get_tree().change_scene_to_file("res://scenes/Tavern.tscn")
+	# Save character to global game state
+	GameState.set_current_character(current_character)
+	
+	# Transition to the tavern scene
+	get_tree().change_scene_to_file("res://scenes/Tavern.tscn")
 
 func _on_back_to_menu():
 	# Return to the main menu
