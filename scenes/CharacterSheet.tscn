@@ -1,0 +1,153 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg3x6l34xqb7h"]
+
+[ext_resource type="Script" path="res://scripts/CharacterSheet.gd" id="1_x5m8j"]
+
+[node name="CharacterSheet" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_x5m8j")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Header" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CharacterName" type="Label" parent="ScrollContainer/VBoxContainer/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Character Name"
+horizontal_alignment = 1
+
+[node name="CharacterClass" type="Label" parent="ScrollContainer/VBoxContainer/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Class: Warrior"
+horizontal_alignment = 1
+
+[node name="RaceGender" type="Label" parent="ScrollContainer/VBoxContainer/Header"]
+layout_mode = 2
+text = "Human • Male"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VitalsSection" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VitalsLabel" type="Label" parent="ScrollContainer/VBoxContainer/VitalsSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Vitals"
+
+[node name="HealthLabel" type="Label" parent="ScrollContainer/VBoxContainer/VitalsSection"]
+layout_mode = 2
+text = "Health: 100/100"
+
+[node name="HealthBar" type="ProgressBar" parent="ScrollContainer/VBoxContainer/VitalsSection"]
+layout_mode = 2
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="ManaLabel" type="Label" parent="ScrollContainer/VBoxContainer/VitalsSection"]
+layout_mode = 2
+text = "Mana: 50/50"
+
+[node name="ManaBar" type="ProgressBar" parent="ScrollContainer/VBoxContainer/VitalsSection"]
+layout_mode = 2
+max_value = 50.0
+value = 50.0
+show_percentage = false
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatsSection" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PrimaryStats" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/StatsSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PrimaryStatsLabel" type="Label" parent="ScrollContainer/VBoxContainer/StatsSection/PrimaryStats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Primary Stats"
+
+[node name="StatsContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/StatsSection/PrimaryStats"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="ScrollContainer/VBoxContainer/StatsSection"]
+layout_mode = 2
+
+[node name="SecondaryStats" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/StatsSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SecondaryStatsLabel" type="Label" parent="ScrollContainer/VBoxContainer/StatsSection/SecondaryStats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Secondary Stats"
+
+[node name="StatsContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/StatsSection/SecondaryStats"]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SkillsSection" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SkillsLabel" type="Label" parent="ScrollContainer/VBoxContainer/SkillsSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Skills"
+
+[node name="SkillsContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/SkillsSection"]
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="EquipmentSection" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="EquipmentLabel" type="Label" parent="ScrollContainer/VBoxContainer/EquipmentSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Equipment & Inventory"
+
+[node name="EquipmentContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/EquipmentSection"]
+layout_mode = 2
+
+[node name="HSeparator5" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonSection" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="ScrollContainer/VBoxContainer/ButtonSection"]
+layout_mode = 2
+text = "Return to Tavern"

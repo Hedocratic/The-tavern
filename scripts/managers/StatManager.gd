@@ -10,7 +10,7 @@ const Character = preload("res://data/Character.gd")
 signal stat_points_changed(available_points: int)
 signal stat_values_changed(stats: Dictionary)
 
-var available_stat_points: int = 20
+var available_stat_points: int = 5
 var character: Character
 
 func _init(initial_character: Character = null):
@@ -53,7 +53,7 @@ func change_stat(stat_name: String, new_value: int) -> bool:
 
 func reset_stats():
 	"""Reset all stats to base values and restore available points"""
-	available_stat_points = 20
+	available_stat_points = 5
 	for stat in character.primary_stats:
 		character.primary_stats[stat] = 10
 	
@@ -64,7 +64,7 @@ func reset_stats():
 func apply_class_bonuses(character_class: CharacterClass):
 	"""Apply class-specific stat bonuses"""
 	# Reset to base first
-	available_stat_points = 20
+	available_stat_points = 5
 	
 	# Apply class starting stats
 	for stat in character_class.starting_stats:
