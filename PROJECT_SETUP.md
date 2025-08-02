@@ -81,32 +81,32 @@ The character creation implements the data model from the GDD:
 
 ```gdscript
 var character_data = {
-    "name": "",
-    "class": "",
-    "race": "",
-    "gender": "",
-    "level": 1,
-    "experience": 0,
-    "stats": {
-        "Strength": 10,
-        "Fortitude": 10,
-        "Agility": 10,
-        "Intelligence": 10,
-        "Charisma": 10,
-        "Arcane": 10
-    },
-    "skills": {
-        "Swimming": 0,
-        "Slashing": 0,
-        "Evocation": 0,
-        "Survival": 0,
-        "Seduction": 0
-    },
-    "inventory": [],
-    "status_effects": [],
-    "buffs": [],
-    "health": 100,
-    "gold": 100
+	"name": "",
+	"class": "",
+	"race": "",
+	"gender": "",
+	"level": 1,
+	"experience": 0,
+	"stats": {
+		"Strength": 10,
+		"Fortitude": 10,
+		"Agility": 10,
+		"Intelligence": 10,
+		"Charisma": 10,
+		"Arcane": 10
+	},
+	"skills": {
+		"Swimming": 0,
+		"Slashing": 0,
+		"Evocation": 0,
+		"Survival": 0,
+		"Seduction": 0
+	},
+	"inventory": [],
+	"status_effects": [],
+	"buffs": [],
+	"health": 100,
+	"gold": 100
 }
 ```
 
