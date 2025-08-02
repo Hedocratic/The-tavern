@@ -3,9 +3,9 @@ extends Control
 # Main Menu Script
 # Handles the main entry point of The Tavern game
 
-@onready var start_button = $VBoxContainer/StartButton
-@onready var options_button = $VBoxContainer/OptionsButton
-@onready var quit_button = $VBoxContainer/QuitButton
+@onready var start_button = $CenterContainer/VBoxContainer/VBoxContainer/StartButton
+@onready var options_button = $CenterContainer/VBoxContainer/VBoxContainer/OptionsButton
+@onready var quit_button = $CenterContainer/VBoxContainer/VBoxContainer/QuitButton
 
 func _ready():
 	# Connect button signals
