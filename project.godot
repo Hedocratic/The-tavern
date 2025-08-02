@@ -11,17 +11,14 @@ config_version=5
 [application]
 
 config/name="The Tavern"
-config/description="Turn-based party RPG with deep character customization"
+config/description="A turn-based, party-based RPG with grid-based combat and map-based exploration"
 run/main_scene="res://scenes/MainMenu.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/features=PackedStringArray("4.3")
 
-[display]
+[autoload]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
-window/size/resizable=true
+GameState="*res://scripts/GameState.gd"
 
 [rendering]
 
-renderer/rendering_method="forward_plus"
+renderer/rendering_method="gl_compatibility"

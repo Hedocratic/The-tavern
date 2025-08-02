@@ -1,17 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://u8yrt3d12h28"]
+[gd_scene load_steps=3 format=3 uid="uid://bfj3k8x9m2ln1"]
 
-[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_5t8qm"]
+[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_a4kx2"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_title"]
-font_size = 36
-font_color = Color(0.9, 0.8, 0.6, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_1"]
+font_size = 48
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource("1_5t8qm")
+script = ExtResource("1_a4kx2")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -20,49 +19,53 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.2, 0.15, 0.1, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -150.0
-offset_right = 150.0
-offset_bottom = 150.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 
-[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
-text = "THE TAVERN"
-label_settings = SubResource("LabelSettings_title")
+alignment = 1
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "The Tavern"
+label_settings = SubResource("LabelSettings_1")
 horizontal_alignment = 1
 
-[node name="SubtitleLabel" type="Label" parent="VBoxContainer"]
+[node name="Subtitle" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "A Turn-Based Party RPG"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
 
-[node name="NewGameButton" type="Button" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "New Game"
+alignment = 1
 
-[node name="LoadGameButton" type="Button" parent="VBoxContainer"]
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Load Game"
+text = "Start New Game"
+flat = false
 
-[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Options"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Quit"
+text = "Quit Game"
 
-[connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/LoadGameButton" to="." method="_on_load_game_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+
+[node name="VersionLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "v0.1.0 - Early Development"
+horizontal_alignment = 1
