@@ -152,7 +152,6 @@ func _setup_skills_ui():
 			skill_spinbox.value = current_character.skills.get(skill, 0)
 			skill_spinbox.value_changed.connect(_on_skill_changed.bind(skill))
 			skill_container.add_child(skill_spinbox)
-			
 			skills_container.add_child(skill_container)
 
 func apply_class_specific_setup(class_name: String):
