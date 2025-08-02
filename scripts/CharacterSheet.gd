@@ -3,6 +3,9 @@ extends Control
 # Character Sheet - Detailed view of character information
 # Shows all stats, skills, equipment, and status
 
+# Preload dependencies
+const Character = preload("res://data/Character.gd")
+
 # UI References
 @onready var character_name_label = $ScrollContainer/VBoxContainer/Header/CharacterName
 @onready var character_class_label = $ScrollContainer/VBoxContainer/Header/CharacterClass

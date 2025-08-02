@@ -2,6 +2,9 @@ extends Control
 
 # Equipment Selection - Shop-like interface for buying basic equipment
 
+# Preload dependencies
+const Equipment = preload("res://data/Equipment.gd")
+
 # UI References
 @onready var gold_label = $VBoxContainer/Header/GoldLabel
 @onready var equipment_categories = $VBoxContainer/Content/EquipmentCategories
