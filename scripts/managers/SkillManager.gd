@@ -116,7 +116,38 @@ func get_skill_categories() -> Dictionary:
 
 func validate_skill_allocation() -> bool:
 	"""Validate that skill allocation is complete and valid"""
-	return available_skill_points >= 0
+	# Check available points are non-negative
+	if available_skill_points < 0:
+		return false
+	
+	# Check all skills are within valid range
+	if not character or not character.skills:
+		return false
+		
+	for skill_name in character.skills:
+		var skill_value = character.skills[skill_name]
+		if skill_value < 0 or skill_value > 10:
+			return false
+	
+	return true
+
+func get_skill_allocation_info() -> Dictionary:
+	"""Get detailed information about skill allocation"""
+	return {
+		"available_points": available_skill_points,
+		"total_allocated": _calculate_total_allocated_skills(),
+		"is_valid": validate_skill_allocation()
+	}
+
+func _calculate_total_allocated_skills() -> int:
+	"""Calculate total skill points allocated"""
+	if not character or not character.skills:
+		return 0
+		
+	var total = 0
+	for skill_name in character.skills:
+		total += character.skills[skill_name]
+	return total
 
 func get_skills_in_category(category_name: String) -> Array:
 	"""Get all skills in a specific category"""

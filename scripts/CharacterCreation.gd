@@ -51,18 +51,41 @@ func _ready():
 	_create_new_character()
 
 func _initialize_managers():
-	"""Initialize all manager instances"""
+	"""Initialize all manager instances with error handling"""
 	current_character = Character.new()
-	stat_manager = StatManager.new(current_character)
-	skill_manager = SkillManager.new(current_character)
-	class_highlighter = ClassHighlighter.new()
-	validator = CharacterValidator.new()
 	
-	# Connect manager signals
-	stat_manager.stat_points_changed.connect(_on_stat_points_changed)
-	stat_manager.stat_values_changed.connect(_on_stat_values_changed)
-	skill_manager.skill_points_changed.connect(_on_skill_points_changed)
-	skill_manager.skill_values_changed.connect(_on_skill_values_changed)
+	# Initialize managers with null checks
+	stat_manager = StatManager.new(current_character)
+	if not stat_manager:
+		push_error("Failed to create StatManager")
+		return
+		
+	skill_manager = SkillManager.new(current_character)
+	if not skill_manager:
+		push_error("Failed to create SkillManager")
+		return
+		
+	class_highlighter = ClassHighlighter.new()
+	if not class_highlighter:
+		push_error("Failed to create ClassHighlighter")
+		return
+		
+	validator = CharacterValidator.new()
+	if not validator:
+		push_error("Failed to create CharacterValidator")
+		return
+	
+	# Connect manager signals with error checking
+	if stat_manager.stat_points_changed.connect(_on_stat_points_changed) != OK:
+		push_error("Failed to connect stat_points_changed signal")
+	if stat_manager.stat_values_changed.connect(_on_stat_values_changed) != OK:
+		push_error("Failed to connect stat_values_changed signal")
+	if skill_manager.skill_points_changed.connect(_on_skill_points_changed) != OK:
+		push_error("Failed to connect skill_points_changed signal")
+	if skill_manager.skill_values_changed.connect(_on_skill_values_changed) != OK:
+		push_error("Failed to connect skill_values_changed signal")
+		
+	print("Managers initialized successfully")
 
 func _initialize_character_classes():
 	"""Initialize available character classes"""
@@ -104,15 +127,20 @@ func _setup_gender_selection():
 	gender_option_button.item_selected.connect(_on_gender_selected)
 
 func _setup_stat_controls():
-	"""Setup stat spinboxes and connect signals"""
+	"""Setup stat spinboxes and connect signals with null checking"""
 	for stat_name in stat_spinboxes:
 		var spinbox = stat_spinboxes[stat_name]
-		if spinbox:
+		if spinbox and is_instance_valid(spinbox):
 			spinbox.min_value = 1
 			spinbox.max_value = 25
 			spinbox.value_changed.connect(_on_stat_changed.bind(stat_name))
+		else:
+			push_error("Invalid stat spinbox for: " + stat_name)
 	
-	name_line_edit.text_changed.connect(_on_name_changed)
+	if name_line_edit and is_instance_valid(name_line_edit):
+		name_line_edit.text_changed.connect(_on_name_changed)
+	else:
+		push_error("Invalid name_line_edit reference")
 
 func _setup_button_connections():
 	"""Connect button signals"""
@@ -183,20 +211,38 @@ func _create_new_character():
 	_update_ui()
 
 func _apply_class_selection(index: int):
-	"""Apply selected class bonuses"""
-	if index >= 0 and index < character_classes.size():
-		var selected_class = character_classes[index]
+	"""Apply selected class bonuses with validation"""
+	if index < 0 or index >= character_classes.size():
+		push_error("Invalid class index: " + str(index))
+		return
 		
-		# Apply class to character
-		current_character.apply_class_bonuses(selected_class)
-		
-		# Update managers
+	var selected_class = character_classes[index]
+	if not selected_class:
+		push_error("Invalid character class at index: " + str(index))
+		return
+	
+	# Apply class to character
+	current_character.apply_class_bonuses(selected_class)
+	
+	# Update managers with null checks
+	if stat_manager:
 		stat_manager.apply_class_bonuses(selected_class)
-		skill_manager.apply_class_bonuses(selected_class)
+	else:
+		push_error("StatManager not initialized")
 		
-		# Update UI
+	if skill_manager:
+		skill_manager.apply_class_bonuses(selected_class)
+	else:
+		push_error("SkillManager not initialized")
+	
+	# Update UI with null checks
+	if class_description_label and is_instance_valid(class_description_label):
 		class_description_label.text = selected_class.description
+	
+	if class_highlighter:
 		class_highlighter.apply_highlighting(selected_class.name, stat_spinboxes)
+	else:
+		push_error("ClassHighlighter not initialized")
 
 # Signal Handlers - Manager Signals
 func _on_stat_points_changed(available_points: int):
@@ -260,18 +306,30 @@ func _update_ui():
 	_update_create_button_state()
 
 func _update_stat_spinboxes():
-	"""Update stat spinbox values"""
+	"""Update stat spinbox values with null checking"""
+	if not stat_manager:
+		push_error("StatManager not available for updating spinboxes")
+		return
+		
 	for stat_name in stat_spinboxes:
 		var spinbox = stat_spinboxes[stat_name]
-		if spinbox:
+		if spinbox and is_instance_valid(spinbox):
 			spinbox.value = stat_manager.get_stat_value(stat_name)
+		else:
+			push_error("Invalid spinbox for stat: " + stat_name)
 
 func _update_skill_spinboxes():
-	"""Update skill spinbox values"""
+	"""Update skill spinbox values with null checking"""
+	if not skill_manager:
+		push_error("SkillManager not available for updating spinboxes")
+		return
+		
 	for skill_name in skill_spinboxes:
 		var spinbox = skill_spinboxes[skill_name]
-		if spinbox:
+		if spinbox and is_instance_valid(spinbox):
 			spinbox.value = skill_manager.get_skill_value(skill_name)
+		else:
+			push_error("Invalid spinbox for skill: " + skill_name)
 
 func _update_secondary_stats_display():
 	"""Update secondary stats display"""
@@ -315,12 +373,17 @@ func _update_create_button_state():
 
 # Button Handlers
 func _on_create_character():
-	"""Handle character creation"""
+	"""Handle character creation with improved error feedback"""
+	if not validator:
+		push_error("Validator not initialized")
+		return
+		
 	var validation_result = validator.validate_character(current_character, stat_manager, skill_manager)
 	
 	if not validation_result.valid:
 		print("Character creation failed: ", validation_result.message)
-		# Could show error dialog here
+		# Show error message to user (could add a popup dialog here)
+		_show_creation_error(validation_result.message)
 		return
 	
 	print("Character created successfully:")
@@ -335,10 +398,24 @@ func _on_create_character():
 	print("  Gold: ", current_character.gold)
 	
 	# Save character to game state
-	GameState.set_current_character(current_character)
+	if GameState:
+		GameState.set_current_character(current_character)
+	else:
+		push_error("GameState not available")
+		return
 	
 	# Transition to tavern
-	get_tree().change_scene_to_file("res://scenes/Tavern.tscn")
+	var result = get_tree().change_scene_to_file("res://scenes/Tavern.tscn")
+	if result != OK:
+		push_error("Failed to change scene to Tavern")
+
+func _show_creation_error(message: String):
+	"""Show character creation error to the user"""
+	# For now just update the create button tooltip
+	# In a full implementation, you might show a popup dialog
+	if create_button and is_instance_valid(create_button):
+		create_button.tooltip_text = "Cannot create character: " + message
+	print("Creation Error: ", message)
 
 func _on_back_to_menu():
 	"""Return to main menu"""

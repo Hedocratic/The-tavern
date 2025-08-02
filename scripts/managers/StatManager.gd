@@ -81,5 +81,36 @@ func get_all_stats() -> Dictionary:
 
 func validate_stat_allocation() -> bool:
 	"""Validate that stat allocation is complete and valid"""
-	# Could add additional validation rules here
-	return available_stat_points >= 0
+	# Check available points are non-negative
+	if available_stat_points < 0:
+		return false
+	
+	# Check all stats are within valid range
+	if not character or not character.primary_stats:
+		return false
+		
+	for stat_name in character.primary_stats:
+		var stat_value = character.primary_stats[stat_name]
+		if stat_value < 1 or stat_value > 25:
+			return false
+	
+	return true
+
+func get_stat_allocation_info() -> Dictionary:
+	"""Get detailed information about stat allocation"""
+	return {
+		"available_points": available_stat_points,
+		"total_allocated": _calculate_total_allocated_stats(),
+		"is_valid": validate_stat_allocation()
+	}
+
+func _calculate_total_allocated_stats() -> int:
+	"""Calculate total stat points allocated above base (10)"""
+	if not character or not character.primary_stats:
+		return 0
+		
+	var total = 0
+	for stat_name in character.primary_stats:
+		var stat_value = character.primary_stats[stat_name]
+		total += max(0, stat_value - 10)  # Count points above base 10
+	return total
