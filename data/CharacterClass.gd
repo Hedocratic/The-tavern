@@ -7,7 +7,7 @@ extends Resource
 @export var starting_skills: Dictionary = {}
 @export var starting_gold: int = 100
 
-static func get_all_classes() -> Array[CharacterClass]:
+static func get_all_classes() -> Array:
 	var classes = []
 	
 	# Warrior
