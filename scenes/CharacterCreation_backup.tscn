@@ -1,0 +1,208 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvj26rpe8b8g5"]
+
+[ext_resource type="Script" path="res://scripts/CharacterCreation.gd" id="1_5r8xh"]
+
+[node name="CharacterCreation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_5r8xh")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Character Creation"
+horizontal_alignment = 1
+
+[node name="CharacterName" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/CharacterName"]
+layout_mode = 2
+text = "Character Name:"
+
+[node name="LineEdit" type="LineEdit" parent="ScrollContainer/VBoxContainer/CharacterName"]
+layout_mode = 2
+placeholder_text = "Enter character name"
+
+[node name="ClassSelection" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/ClassSelection"]
+layout_mode = 2
+text = "Class:"
+
+[node name="OptionButton" type="OptionButton" parent="ScrollContainer/VBoxContainer/ClassSelection"]
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="ScrollContainer/VBoxContainer/ClassSelection"]
+layout_mode = 2
+text = "Select a class to see description"
+autowrap_mode = 2
+
+[node name="RaceSelection" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/RaceSelection"]
+layout_mode = 2
+text = "Race:"
+
+[node name="OptionButton" type="OptionButton" parent="ScrollContainer/VBoxContainer/RaceSelection"]
+layout_mode = 2
+
+[node name="GenderSelection" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/GenderSelection"]
+layout_mode = 2
+text = "Gender:"
+
+[node name="OptionButton" type="OptionButton" parent="ScrollContainer/VBoxContainer/GenderSelection"]
+layout_mode = 2
+
+[node name="Stats" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Stats"]
+layout_mode = 2
+text = "Primary Stats"
+
+[node name="StatPointsLabel" type="Label" parent="ScrollContainer/VBoxContainer/Stats"]
+layout_mode = 2
+text = "Available Stat Points: 20"
+
+[node name="StrengthContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Stats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Stats/StrengthContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Strength:"
+
+[node name="SpinBox" type="SpinBox" parent="ScrollContainer/VBoxContainer/Stats/StrengthContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+
+[node name="FortitudeContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Stats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Stats/FortitudeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fortitude:"
+
+[node name="SpinBox" type="SpinBox" parent="ScrollContainer/VBoxContainer/Stats/FortitudeContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+
+[node name="AgilityContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Stats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Stats/AgilityContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Agility:"
+
+[node name="SpinBox" type="SpinBox" parent="ScrollContainer/VBoxContainer/Stats/AgilityContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+
+[node name="IntelligenceContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Stats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Stats/IntelligenceContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Intelligence:"
+
+[node name="SpinBox" type="SpinBox" parent="ScrollContainer/VBoxContainer/Stats/IntelligenceContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+
+[node name="CharismaContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Stats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Stats/CharismaContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Charisma:"
+
+[node name="SpinBox" type="SpinBox" parent="ScrollContainer/VBoxContainer/Stats/CharismaContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+
+[node name="ArcaneContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Stats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Stats/ArcaneContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Arcane:"
+
+[node name="SpinBox" type="SpinBox" parent="ScrollContainer/VBoxContainer/Stats/ArcaneContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+
+[node name="Skills" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Skills"]
+layout_mode = 2
+text = "Skills"
+
+[node name="SkillPointsLabel" type="Label" parent="ScrollContainer/VBoxContainer/Skills"]
+layout_mode = 2
+text = "Available Skill Points: 10"
+
+[node name="SkillsContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Skills"]
+layout_mode = 2
+
+[node name="SecondaryStats" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/SecondaryStats"]
+layout_mode = 2
+text = "Secondary Stats (Calculated)"
+
+[node name="StatsContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/SecondaryStats"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="ScrollContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Back to Menu"
+
+[node name="ResetButton" type="Button" parent="ScrollContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reset"
+
+[node name="CreateButton" type="Button" parent="ScrollContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Create Character"

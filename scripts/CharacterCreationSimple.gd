@@ -1,16 +1,13 @@
 extends Control
 
-# Refactored Character Creation Screen
-# Uses focused managers for different concerns and improved architecture
+# Simple Character Creation Screen - Working Demo
+# Simplified version without complex manager dependencies
 
-# Managers
-var stat_manager: StatManager
-var skill_manager: SkillManager
-var class_highlighter: ClassHighlighter
-var validator: CharacterValidator
+# Preload necessary classes
+const Character = preload("res://data/Character.gd")
 
 # Data
-var character_classes: Array[CharacterClass] = []
+var character_classes: Array = []
 var current_character: Character
 
 # UI References - Basic Info
@@ -41,32 +38,40 @@ var current_character: Character
 @onready var create_button = $ScrollContainer/VBoxContainer/ButtonContainer/CreateButton
 @onready var reset_button = $ScrollContainer/VBoxContainer/ButtonContainer/ResetButton
 
-# Skill UI components (dynamically created)
+# Simple stat and skill management
+var available_stat_points: int = 20
+var available_skill_points: int = 10
 var skill_spinboxes: Dictionary = {}
 
 func _ready():
-	_initialize_managers()
 	_initialize_character_classes()
 	_setup_ui()
 	_create_new_character()
 
-func _initialize_managers():
-	"""Initialize all manager instances"""
-	current_character = Character.new()
-	stat_manager = StatManager.new(current_character)
-	skill_manager = SkillManager.new(current_character)
-	class_highlighter = ClassHighlighter.new()
-	validator = CharacterValidator.new()
-	
-	# Connect manager signals
-	stat_manager.stat_points_changed.connect(_on_stat_points_changed)
-	stat_manager.stat_values_changed.connect(_on_stat_values_changed)
-	skill_manager.skill_points_changed.connect(_on_skill_points_changed)
-	skill_manager.skill_values_changed.connect(_on_skill_values_changed)
-
 func _initialize_character_classes():
-	"""Initialize available character classes"""
-	character_classes = CharacterClass.get_all_classes()
+	"""Initialize character classes without complex dependencies"""
+	character_classes = [
+		{
+			"name": "Warrior",
+			"description": "A strong melee fighter focused on Strength and Fortitude.",
+			"stats": {"Strength": 16, "Fortitude": 15, "Agility": 12, "Intelligence": 8, "Charisma": 10, "Arcane": 6}
+		},
+		{
+			"name": "Wizard",
+			"description": "A master of arcane magic, emphasizing Intelligence and Arcane power.",
+			"stats": {"Strength": 8, "Fortitude": 10, "Agility": 11, "Intelligence": 16, "Charisma": 12, "Arcane": 15}
+		},
+		{
+			"name": "Thief",
+			"description": "A nimble character skilled in stealth and agility.",
+			"stats": {"Strength": 10, "Fortitude": 11, "Agility": 16, "Intelligence": 13, "Charisma": 12, "Arcane": 8}
+		},
+		{
+			"name": "Paladin",
+			"description": "A holy warrior balancing strength, faith, and leadership.",
+			"stats": {"Strength": 15, "Fortitude": 14, "Agility": 10, "Intelligence": 11, "Charisma": 15, "Arcane": 12}
+		}
+	]
 
 func _setup_ui():
 	"""Setup UI components and connect signals"""
@@ -112,7 +117,8 @@ func _setup_stat_controls():
 			spinbox.max_value = 25
 			spinbox.value_changed.connect(_on_stat_changed.bind(stat_name))
 	
-	name_line_edit.text_changed.connect(_on_name_changed)
+	if name_line_edit:
+		name_line_edit.text_changed.connect(_on_name_changed)
 
 func _setup_button_connections():
 	"""Connect button signals"""
@@ -129,20 +135,14 @@ func _setup_skills_ui():
 	await get_tree().process_frame
 	
 	skill_spinboxes.clear()
-	var skill_categories = skill_manager.get_skill_categories()
 	
-	for category in skill_categories:
-		_create_skill_category(category, skill_categories[category])
-
-func _create_skill_category(category_name: String, skills: Array):
-	"""Create UI for a skill category"""
-	# Category label
-	var category_label = Label.new()
-	category_label.text = category_name
-	category_label.add_theme_font_size_override("font_size", 16)
-	skills_container.add_child(category_label)
+	# Simple skill list for demo
+	var skills = [
+		"Slashing Weapons", "Blunt Weapons", "Archery", "Heavy Armor", "Light Armor",
+		"Evocation", "Restoration", "Arcane Knowledge", "Stealth", "Lockpicking",
+		"Persuasion", "Intimidation", "Survival", "First Aid", "Leadership"
+	]
 	
-	# Skills in category
 	for skill in skills:
 		_create_skill_control(skill)
 
@@ -160,7 +160,7 @@ func _create_skill_control(skill_name: String):
 	var skill_spinbox = SpinBox.new()
 	skill_spinbox.min_value = 0
 	skill_spinbox.max_value = 10
-	skill_spinbox.value = skill_manager.get_skill_value(skill_name)
+	skill_spinbox.value = 0
 	skill_spinbox.value_changed.connect(_on_skill_changed.bind(skill_name))
 	skill_container.add_child(skill_spinbox)
 	
@@ -174,48 +174,28 @@ func _create_new_character():
 	current_character = Character.new()
 	current_character.name = ""
 	
-	# Update managers
-	stat_manager.set_character(current_character)
-	skill_manager.set_character(current_character)
-	
-	# Apply default class
+	# Apply default class (first one)
 	_apply_class_selection(0)
 	_update_ui()
 
 func _apply_class_selection(index: int):
 	"""Apply selected class bonuses"""
-	if index >= 0 and index < character_classes.size():
-		var selected_class = character_classes[index]
+	if index < 0 or index >= character_classes.size():
+		return
 		
-		# Apply class to character
-		current_character.apply_class_bonuses(selected_class)
-		
-		# Update managers
-		stat_manager.apply_class_bonuses(selected_class)
-		skill_manager.apply_class_bonuses(selected_class)
-		
-		# Update UI
-		class_description_label.text = selected_class.description
-		class_highlighter.apply_highlighting(selected_class.name, stat_spinboxes)
-
-# Signal Handlers - Manager Signals
-func _on_stat_points_changed(available_points: int):
-	"""Handle stat points change from StatManager"""
-	stat_points_label.text = "Available Stat Points: " + str(available_points)
-
-func _on_stat_values_changed(stats: Dictionary):
-	"""Handle stat values change from StatManager"""
-	_update_stat_spinboxes()
-	_update_secondary_stats_display()
-
-func _on_skill_points_changed(available_points: int):
-	"""Handle skill points change from SkillManager"""
-	skill_points_label.text = "Available Skill Points: " + str(available_points)
-
-func _on_skill_values_changed(skills: Dictionary):
-	"""Handle skill values change from SkillManager"""
-	_update_skill_spinboxes()
-	_update_secondary_stats_display()
+	var selected_class = character_classes[index]
+	current_character.character_class = selected_class.name
+	
+	# Apply class stats
+	for stat_name in selected_class.stats:
+		current_character.primary_stats[stat_name] = selected_class.stats[stat_name]
+	
+	# Update description
+	class_description_label.text = selected_class.description
+	
+	# Recalculate available points
+	available_stat_points = 20
+	available_skill_points = 10
 
 # Signal Handlers - UI Events
 func _on_class_selected(index: int):
@@ -240,22 +220,42 @@ func _on_name_changed(new_text: String):
 	_update_create_button_state()
 
 func _on_stat_changed(stat_name: String, new_value: float):
-	"""Handle stat change"""
-	if not stat_manager.change_stat(stat_name, int(new_value)):
-		# Revert to old value if change failed
-		_update_stat_spinboxes()
+	"""Handle stat change with point management"""
+	var old_value = current_character.primary_stats.get(stat_name, 10)
+	var difference = int(new_value) - old_value
+	
+	if available_stat_points >= difference:
+		current_character.primary_stats[stat_name] = int(new_value)
+		available_stat_points -= difference
+		current_character._calculate_secondary_stats()
+		_update_stat_points_display()
+		_update_secondary_stats_display()
+	else:
+		# Revert to old value
+		var spinbox = stat_spinboxes[stat_name]
+		spinbox.value = old_value
 
 func _on_skill_changed(skill_name: String, new_value: float):
-	"""Handle skill change"""
-	if not skill_manager.change_skill(skill_name, int(new_value)):
-		# Revert to old value if change failed
-		_update_skill_spinboxes()
+	"""Handle skill change with point management"""
+	var old_value = current_character.skills.get(skill_name, 0)
+	var difference = int(new_value) - old_value
+	
+	if available_skill_points >= difference:
+		current_character.skills[skill_name] = int(new_value)
+		available_skill_points -= difference
+		_update_skill_points_display()
+	else:
+		# Revert to old value
+		var spinbox = skill_spinboxes[skill_name]
+		spinbox.value = old_value
 
 # UI Update Methods
 func _update_ui():
 	"""Update all UI elements"""
 	_update_stat_spinboxes()
 	_update_skill_spinboxes()
+	_update_stat_points_display()
+	_update_skill_points_display()
 	_update_secondary_stats_display()
 	_update_create_button_state()
 
@@ -264,14 +264,22 @@ func _update_stat_spinboxes():
 	for stat_name in stat_spinboxes:
 		var spinbox = stat_spinboxes[stat_name]
 		if spinbox:
-			spinbox.value = stat_manager.get_stat_value(stat_name)
+			spinbox.value = current_character.primary_stats.get(stat_name, 10)
 
 func _update_skill_spinboxes():
 	"""Update skill spinbox values"""
 	for skill_name in skill_spinboxes:
 		var spinbox = skill_spinboxes[skill_name]
 		if spinbox:
-			spinbox.value = skill_manager.get_skill_value(skill_name)
+			spinbox.value = current_character.skills.get(skill_name, 0)
+
+func _update_stat_points_display():
+	"""Update stat points label"""
+	stat_points_label.text = "Available Stat Points: " + str(available_stat_points)
+
+func _update_skill_points_display():
+	"""Update skill points label"""
+	skill_points_label.text = "Available Skill Points: " + str(available_skill_points)
 
 func _update_secondary_stats_display():
 	"""Update secondary stats display"""
@@ -281,11 +289,10 @@ func _update_secondary_stats_display():
 	
 	await get_tree().process_frame
 	
-	# Important secondary stats to display
+	# Display important secondary stats
 	var important_stats = [
 		"Speed", "Carry Capacity", "Dodge", "Accuracy", "Critical Chance",
-		"Armor Rating", "Magic Resistance", "Perception", "Stealth", 
-		"HP Regeneration", "MP Regeneration", "Spell Power", "Healing Power"
+		"Armor Rating", "Magic Resistance", "HP Regeneration", "MP Regeneration"
 	]
 	
 	for stat in important_stats:
@@ -304,23 +311,14 @@ func _update_secondary_stats_display():
 
 func _update_create_button_state():
 	"""Update create button enabled state"""
-	var validation_result = validator.validate_character(current_character, stat_manager, skill_manager)
-	create_button.disabled = not validation_result.valid
-	
-	# Could show validation message in a label if desired
-	if not validation_result.valid:
-		create_button.tooltip_text = validation_result.message
-	else:
-		create_button.tooltip_text = ""
+	var is_valid = not current_character.name.is_empty() and current_character.name.strip_edges().length() > 0
+	create_button.disabled = not is_valid
 
 # Button Handlers
 func _on_create_character():
 	"""Handle character creation"""
-	var validation_result = validator.validate_character(current_character, stat_manager, skill_manager)
-	
-	if not validation_result.valid:
-		print("Character creation failed: ", validation_result.message)
-		# Could show error dialog here
+	if current_character.name.is_empty():
+		print("Please enter a character name")
 		return
 	
 	print("Character created successfully:")
@@ -332,10 +330,10 @@ func _on_create_character():
 	print("  Skills: ", current_character.skills)
 	print("  HP: ", current_character.health, "/", current_character.max_health)
 	print("  MP: ", current_character.mana, "/", current_character.max_mana)
-	print("  Gold: ", current_character.gold)
 	
 	# Save character to game state
-	GameState.set_current_character(current_character)
+	if GameState:
+		GameState.set_current_character(current_character)
 	
 	# Transition to tavern
 	get_tree().change_scene_to_file("res://scenes/Tavern.tscn")

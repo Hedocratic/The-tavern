@@ -48,8 +48,9 @@ var class_stat_preferences: Dictionary = {
 	"Monk": {
 		"primary": ["Agility", "Fortitude", "Strength"],
 		"color": Color.ORANGE
-	}
+	},
 }
+
 
 func get_highlighted_stats(class_name: String) -> Array[String]:
 	"""Get the stats that should be highlighted for a given class"""
