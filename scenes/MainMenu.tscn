@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_5t8qm"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 36
+font_color = Color(0.9, 0.8, 0.6, 1)
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -62,7 +66,3 @@ text = "Quit"
 [connection signal="pressed" from="VBoxContainer/LoadGameButton" to="." method="_on_load_game_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_title"]
-font_size = 36
-font_color = Color(0.9, 0.8, 0.6, 1)

@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://blk4h2yf1j2v7"]
+[gd_scene load_steps=3 format=3 uid="uid://blk4h2yf1j2v7"]
 
 [ext_resource type="Script" path="res://scripts/CharacterCreation.gd" id="1_7p0wn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 28
+font_color = Color(0.9, 0.8, 0.6, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_section"]
+font_size = 18
+font_color = Color(0.8, 0.7, 0.5, 1)
 
 [node name="CharacterCreation" type="Control"]
 layout_mode = 3
@@ -376,14 +384,6 @@ size_flags_horizontal = 3
 [node name="CreateButton" type="Button" parent="ButtonContainer"]
 layout_mode = 2
 text = "Create Character"
-
-[sub_resource type="LabelSettings" id="LabelSettings_title"]
-font_size = 28
-font_color = Color(0.9, 0.8, 0.6, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_section"]
-font_size = 18
-font_color = Color(0.8, 0.7, 0.5, 1)
 
 [connection signal="pressed" from="ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/CreateButton" to="." method="_on_create_button_pressed"]
