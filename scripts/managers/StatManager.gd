@@ -1,6 +1,9 @@
 class_name StatManager
 extends RefCounted
 
+# Preload dependencies
+const Character = preload("res://data/Character.gd")
+
 # Manages stat allocation and validation for character creation
 # Separates stat-related logic from UI concerns
 

@@ -1,6 +1,9 @@
 class_name SkillManager
 extends RefCounted
 
+# Preload dependencies
+const Character = preload("res://data/Character.gd")
+
 # Manages skill allocation and validation for character creation
 # Organizes skills by category and handles point allocation
 
