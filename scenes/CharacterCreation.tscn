@@ -1,0 +1,389 @@
+[gd_scene load_steps=2 format=3 uid="uid://blk4h2yf1j2v7"]
+
+[ext_resource type="Script" path="res://scripts/CharacterCreation.gd" id="1_7p0wn"]
+
+[node name="CharacterCreation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_7p0wn")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.15, 0.12, 0.08, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -80.0
+
+[node name="MainVBox" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TitleLabel" type="Label" parent="ScrollContainer/MainVBox"]
+layout_mode = 2
+text = "CHARACTER CREATION"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/MainVBox"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LeftPanel" type="VBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BasicInfoLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel"]
+layout_mode = 2
+text = "Basic Information"
+label_settings = SubResource("LabelSettings_section")
+
+[node name="BasicInfoContainer" type="VBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel"]
+layout_mode = 2
+
+[node name="NameContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/BasicInfoContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/BasicInfoContainer/NameContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Name:"
+
+[node name="NameLineEdit" type="LineEdit" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/BasicInfoContainer/NameContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter character name"
+
+[node name="RaceContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/BasicInfoContainer"]
+layout_mode = 2
+
+[node name="RaceLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/BasicInfoContainer/RaceContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Race:"
+
+[node name="RaceOptionButton" type="OptionButton" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/BasicInfoContainer/RaceContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 4
+popup/item_0/text = "Human"
+popup/item_1/text = "Elf"
+popup/item_2/text = "Dwarf"
+popup/item_3/text = "Halfling"
+
+[node name="GenderContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/BasicInfoContainer"]
+layout_mode = 2
+
+[node name="GenderLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/BasicInfoContainer/GenderContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Gender:"
+
+[node name="GenderOptionButton" type="OptionButton" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/BasicInfoContainer/GenderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 3
+popup/item_0/text = "Male"
+popup/item_1/text = "Female"
+popup/item_2/text = "Non-binary"
+
+[node name="ClassContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/BasicInfoContainer"]
+layout_mode = 2
+
+[node name="ClassLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/BasicInfoContainer/ClassContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Class:"
+
+[node name="ClassOptionButton" type="OptionButton" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/BasicInfoContainer/ClassContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 6
+popup/item_0/text = "Fighter"
+popup/item_1/text = "Rogue"
+popup/item_2/text = "Wizard"
+popup/item_3/text = "Cleric"
+popup/item_4/text = "Ranger"
+popup/item_5/text = "Bard"
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel"]
+layout_mode = 2
+
+[node name="StatsLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel"]
+layout_mode = 2
+text = "Primary Statistics"
+label_settings = SubResource("LabelSettings_section")
+
+[node name="StatsContainer" type="VBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel"]
+layout_mode = 2
+
+[node name="StrengthContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer"]
+layout_mode = 2
+
+[node name="StrengthLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer/StrengthContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Strength:"
+
+[node name="StrengthSpinBox" type="SpinBox" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer/StrengthContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+
+[node name="FortitudeContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer"]
+layout_mode = 2
+
+[node name="FortitudeLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer/FortitudeContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Fortitude:"
+
+[node name="FortitudeSpinBox" type="SpinBox" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer/FortitudeContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+
+[node name="AgilityContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer"]
+layout_mode = 2
+
+[node name="AgilityLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer/AgilityContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Agility:"
+
+[node name="AgilitySpinBox" type="SpinBox" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer/AgilityContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+
+[node name="IntelligenceContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer"]
+layout_mode = 2
+
+[node name="IntelligenceLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer/IntelligenceContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Intelligence:"
+
+[node name="IntelligenceSpinBox" type="SpinBox" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer/IntelligenceContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+
+[node name="CharismaContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer"]
+layout_mode = 2
+
+[node name="CharismaLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer/CharismaContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Charisma:"
+
+[node name="CharismaSpinBox" type="SpinBox" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer/CharismaContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+
+[node name="ArcaneContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer"]
+layout_mode = 2
+
+[node name="ArcaneLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer/ArcaneContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Arcane:"
+
+[node name="ArcaneSpinBox" type="SpinBox" parent="ScrollContainer/MainVBox/HBoxContainer/LeftPanel/StatsContainer/ArcaneContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+
+[node name="VSeparator" type="VSeparator" parent="ScrollContainer/MainVBox/HBoxContainer"]
+layout_mode = 2
+
+[node name="RightPanel" type="VBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SkillsLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel"]
+layout_mode = 2
+text = "Skills"
+label_settings = SubResource("LabelSettings_section")
+
+[node name="SkillsContainer" type="VBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel"]
+layout_mode = 2
+
+[node name="SwimmingContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer"]
+layout_mode = 2
+
+[node name="SwimmingLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer/SwimmingContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Swimming:"
+
+[node name="SwimmingSpinBox" type="SpinBox" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer/SwimmingContainer"]
+layout_mode = 2
+max_value = 10.0
+
+[node name="SlashingContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer"]
+layout_mode = 2
+
+[node name="SlashingLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer/SlashingContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Slashing:"
+
+[node name="SlashingSpinBox" type="SpinBox" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer/SlashingContainer"]
+layout_mode = 2
+max_value = 10.0
+
+[node name="EvocationContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer"]
+layout_mode = 2
+
+[node name="EvocationLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer/EvocationContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Evocation:"
+
+[node name="EvocationSpinBox" type="SpinBox" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer/EvocationContainer"]
+layout_mode = 2
+max_value = 10.0
+
+[node name="SurvivalContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer"]
+layout_mode = 2
+
+[node name="SurvivalLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer/SurvivalContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Survival:"
+
+[node name="SurvivalSpinBox" type="SpinBox" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer/SurvivalContainer"]
+layout_mode = 2
+max_value = 10.0
+
+[node name="SeductionContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer"]
+layout_mode = 2
+
+[node name="SeductionLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer/SeductionContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Seduction:"
+
+[node name="SeductionSpinBox" type="SpinBox" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/SkillsContainer/SeductionContainer"]
+layout_mode = 2
+max_value = 10.0
+
+[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel"]
+layout_mode = 2
+
+[node name="EquipmentLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel"]
+layout_mode = 2
+text = "Starting Equipment"
+label_settings = SubResource("LabelSettings_section")
+
+[node name="EquipmentContainer" type="VBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel"]
+layout_mode = 2
+
+[node name="WeaponContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/EquipmentContainer"]
+layout_mode = 2
+
+[node name="WeaponLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/EquipmentContainer/WeaponContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Weapon:"
+
+[node name="WeaponOptionButton" type="OptionButton" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/EquipmentContainer/WeaponContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 5
+popup/item_0/text = "Sword"
+popup/item_1/text = "Bow"
+popup/item_2/text = "Staff"
+popup/item_3/text = "Dagger"
+popup/item_4/text = "Mace"
+
+[node name="ArmorContainer" type="HBoxContainer" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/EquipmentContainer"]
+layout_mode = 2
+
+[node name="ArmorLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/EquipmentContainer/ArmorContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Armor:"
+
+[node name="ArmorOptionButton" type="OptionButton" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel/EquipmentContainer/ArmorContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 4
+popup/item_0/text = "Cloth"
+popup/item_1/text = "Leather"
+popup/item_2/text = "Chain Mail"
+popup/item_3/text = "Plate Mail"
+
+[node name="HSeparator4" type="HSeparator" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel"]
+layout_mode = 2
+
+[node name="SummaryLabel" type="Label" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel"]
+layout_mode = 2
+text = "Character Summary"
+label_settings = SubResource("LabelSettings_section")
+
+[node name="SummaryText" type="RichTextLabel" parent="ScrollContainer/MainVBox/HBoxContainer/RightPanel"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Character preview will appear here..."
+
+[node name="ButtonContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -60.0
+offset_right = -20.0
+offset_bottom = -20.0
+anchor_right = 1
+
+[node name="BackButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Back to Menu"
+
+[node name="Spacer" type="Control" parent="ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CreateButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Create Character"
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 28
+font_color = Color(0.9, 0.8, 0.6, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_section"]
+font_size = 18
+font_color = Color(0.8, 0.7, 0.5, 1)
+
+[connection signal="pressed" from="ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/CreateButton" to="." method="_on_create_button_pressed"]
