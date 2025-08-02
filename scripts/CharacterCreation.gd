@@ -28,6 +28,7 @@ var available_skill_points: int = 10
 @onready var class_description_label = $ScrollContainer/VBoxContainer/ClassSelection/DescriptionLabel
 
 # Buttons
+@onready var back_button = $ScrollContainer/VBoxContainer/ButtonContainer/BackButton
 @onready var create_button = $ScrollContainer/VBoxContainer/ButtonContainer/CreateButton
 @onready var reset_button = $ScrollContainer/VBoxContainer/ButtonContainer/ResetButton
 
@@ -80,6 +81,7 @@ func _setup_ui():
 	arcane_spinbox.value_changed.connect(_on_stat_changed.bind("Arcane"))
 	
 	# Connect buttons
+	back_button.pressed.connect(_on_back_to_menu)
 	create_button.pressed.connect(_on_create_character)
 	reset_button.pressed.connect(_on_reset_character)
 	
@@ -153,17 +155,17 @@ func _setup_skills_ui():
 			
 			skills_container.add_child(skill_container)
 
-# This function handles class-specific character setup
 func apply_class_specific_setup(class_name: String):
-	# Fixed syntax: added parameter type, closing parenthesis and colon
-	var example_var = "test"
-	# Fixed indentation
-	
-	match class_name:  # Fixed: proper function body structure
-		"Warrior":  # Fixed: proper match case indentation
-			print("Selected Warrior")  # Fixed: proper case body indentation
-			if fortitude_spinbox:  # Fixed: proper statement structure
-				fortitude_spinbox.value = 15
+	# Apply class-specific UI adjustments or highlights
+	match class_name:
+		"Warrior":
+			print("Selected Warrior - emphasizing Strength and Fortitude")
+		"Wizard":
+			print("Selected Wizard - emphasizing Intelligence and Arcane")
+		"Thief":
+			print("Selected Thief - emphasizing Agility and Stealth")
+		_:
+			print("Selected class: ", class_name)
 
 func _on_class_selected(index: int):
 	_apply_class_selection(index)
@@ -288,6 +290,11 @@ func _on_create_character():
 	
 	# You might transition to the main game or tavern scene here
 	# get_tree().change_scene_to_file("res://scenes/Tavern.tscn")
+
+func _on_back_to_menu():
+	# Return to the main menu
+	print("Returning to main menu...")
+	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
 
 func _on_reset_character():
 	_create_new_character()
