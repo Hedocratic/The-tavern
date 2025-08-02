@@ -160,7 +160,7 @@ func _on_party_selected():
 
 func _on_shop_selected():
 	print("Visit Shop selected - buy/sell equipment")
-	# TODO: Implement shop UI
+	get_tree().change_scene_to_file("res://scenes/EquipmentSelection.tscn")
 
 func _on_quests_selected():
 	print("Local Quests selected - view available quests")
@@ -168,7 +168,7 @@ func _on_quests_selected():
 
 func _on_character_sheet_selected():
 	print("Character Sheet selected - view detailed character info")
-	# TODO: Implement detailed character sheet UI
+	get_tree().change_scene_to_file("res://scenes/CharacterSheet.tscn")
 
 func _on_new_character():
 	print("Create New Character selected - returning to character creation")
