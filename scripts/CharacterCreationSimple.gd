@@ -3,6 +3,9 @@ extends Control
 # Simple Character Creation Screen - Working Demo
 # Simplified version without complex manager dependencies
 
+# Preload necessary classes
+const Character = preload("res://data/Character.gd")
+
 # Data
 var character_classes: Array = []
 var current_character: Character

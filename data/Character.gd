@@ -1,6 +1,9 @@
 class_name Character
 extends Resource
 
+# Preload dependencies
+const CharacterClass = preload("res://data/CharacterClass.gd")
+
 @export var name: String = ""
 @export var character_class: String = ""
 @export var race: String = "Human"

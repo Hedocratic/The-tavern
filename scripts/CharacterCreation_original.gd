@@ -154,9 +154,9 @@ func _setup_skills_ui():
 			skill_container.add_child(skill_spinbox)
 			skills_container.add_child(skill_container)
 
-func apply_class_specific_setup(class_name: String):
+func apply_class_specific_setup(selected_class_name: String):
 	# Apply class-specific UI adjustments or highlights and provide useful feedback
-	match class_name:
+	match selected_class_name:
 		"Warrior":
 			print("Selected Warrior - emphasizing Strength and Fortitude")
 			# Highlight strength and fortitude stats
@@ -225,12 +225,12 @@ func apply_class_specific_setup(class_name: String):
 			if fortitude_spinbox:
 				fortitude_spinbox.modulate = Color.ORANGE
 		_:
-			print("Selected class: ", class_name)
+			print("Selected class: ", selected_class_name)
 	
 	# Reset other stat spinboxes to normal color
-	_reset_non_highlighted_stats(class_name)
+	_reset_non_highlighted_stats(selected_class_name)
 
-func _reset_non_highlighted_stats(class_name: String):
+func _reset_non_highlighted_stats(selected_class_name: String):
 	"""Reset stat spinboxes that aren't highlighted for the selected class"""
 	# First reset all to white
 	var all_spinboxes = [
